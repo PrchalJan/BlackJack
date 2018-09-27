@@ -1,5 +1,6 @@
 
 # I'm programming the classes here.
+import random
 
 suits = ('Spades', 'Diamodns', 'Clubs', 'Hearts')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
@@ -18,13 +19,27 @@ class Card():
 
 
 
-
-
 class Deck():
 	def __init__(self):
 		self.cards = []
+		for suit in suits:
+			for rank in ranks:
+				self.cards.append(Card(suit,rank))
+
+	def __str__(self):
+		comp = ''
+		for card in self.cards:
+			comp = comp + '\n' + card.__str__()
+		return 'The deck has: \n' + comp
+
+	def shuffle(self):
+		random.shuffle(self.cards)
+
+
 
 class Chips():
 	def __init__(self):
 		self.total = 100
 		self.bet = 0
+
+print(random.__file__)

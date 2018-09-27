@@ -1,6 +1,7 @@
 
-from packages import func_package
 from packages.classes import class_package
+from packages import func_package
+
 
 #I'm programming the game here	
 
