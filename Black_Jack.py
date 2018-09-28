@@ -4,8 +4,6 @@ from packages import func_package as fn
 
 #I'm programming the game here	
 
-playing = True
-
 
 chips = cl.Chips()
 
@@ -36,8 +34,36 @@ while True:
 
 	fn.display_some(player_hand, dealer_hand)
 
-	while playing:
-		
+	fn.playing = True
 
+	while fn.playing:
+		fn.hit_or_stand(player_hand, deck)
+		print('\n'*100)
+		fn.display_some(player_hand, dealer_hand)
+		if player_hand.value > 21:
+			fn.player_busts(chips)
+			fn.playing = False
+	
+	if player_hand.value <= 21:	
+		while dealer_hand.value < 17:
+			fn.take_hit(dealer_hand, deck)
+
+		print('\n'*100)
+		fn.display_all(player_hand, dealer_hand)
+
+		if dealer_hand.value > 21:
+			fn.dealer_busts(chips)
+		elif player_hand.value > dealer_hand.value:
+			fn.player_wins(chips)
+		elif player_hand.value < dealer_hand.value:
+			fn.dealer_wins(chips)
+		else:
+			fn.push(chips)
+	print("Player's winnings stand at {}".format(chips.total))
+	if fn.play_again():
+		continue
+	else:
+		print('\n'*100)
+		print("Thanks for playing")
 	break
 
